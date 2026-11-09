@@ -1,7 +1,7 @@
 """Explainer Agent: explains a programming topic for beginners."""
 from google.adk.agents import Agent
 
-from google.adk.models.lite_llm import LiteLlm
+from agents.agent_runner import get_model, run_agent
 
 EXPLAINER_INSTRUCTION = """You are an explainer agent for beginner programmers.
 You receive a programming topic. Explain it simply and accurately.
@@ -28,7 +28,13 @@ def create_explainer_agent():
     """Creer l'agent qui explique"""
     return Agent(
         name="explainer_agent",                         # identifiant, sans espace
-        model=get_model # le modèle via LiteLLM
+        model=get_model(),                                # le modèle via LiteLLM
         description="Explains a programming topic.",    # à quoi il sert (1 phrase)
-        instruction=EXPLAINER_INSTRUCTION, # LE comportement
+        instruction=EXPLAINER_INSTRUCTION,              # LE comportement
     )
+
+
+async def run_explainer_agent(topic):
+    """Run the Explainer Agent on a topic and return its Markdown."""
+    agent = create_explainer_agent()
+    return await run_agent(agent, f"Topic: {topic}")
