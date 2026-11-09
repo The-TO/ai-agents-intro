@@ -7,8 +7,15 @@ import sys
 from agents.explainer_agent import run_explainer_agent
 from tools.file_writer import save_markdown_file
 from tools.validation import validate_required_sections
+from agents.practice_designer_agent import run_practice_designer_agent
 
 OUTPUT_PATH = "output/study_guide.md"
+
+async def generate(topic):
+    explanation = await run_explainer_agent(topic)
+    practice = await run_practice_designer_agent(topic, explanation)
+    return f"# Topic: {topic}\n\n{explanation}\n\n{practice}\n"
+
 
 def main():
     if len (sys.argv) > 1:
