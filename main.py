@@ -25,11 +25,11 @@ def main():
     explanation = asyncio.run(run_explainer_agent(topic))
     markdown = f"# Topic {topic}\n\n{explanation}\n"
 
-    result = validate_required_sections
+    result = validate_required_sections(markdown)
     if result["valid"]:
         print("Validation: OK")
     else:
-        print("Validation: missing sections:" + ", ".join(result["missing"]))
+        print("Validation: missing sections: " + ", ".join(result["missing"]))
 
     print(save_markdown_file(OUTPUT_PATH, markdown))
 
