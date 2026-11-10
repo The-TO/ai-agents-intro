@@ -1,38 +1,64 @@
-# Topic: C langage
+# Topic: Python decorators
 
 ### Simple Explanation
-C is a programming language that was created in the 1970s by Dennis Ritchie. It is often used for building operating systems, games, and other high-performance applications. C is known for its speed, efficiency, and flexibility, making it a popular choice for many types of programming projects.
 
-C is a low-level language, meaning it allows direct access to computer hardware. This gives it the ability to be very fast and efficient, but it also means that it requires more manual memory management than higher-level languages like Java or Python.
+Python decorators are a powerful tool for modifying the behavior of functions without changing their source code. They allow you to wrap a function with another function, which is called the decorator, without altering the original function's name or syntax. This technique is useful for tasks such as logging, authentication, and caching.
 
-One of the key features of C is its portability, meaning that programs written in C can be compiled and run on many different types of computers with minimal modification.
+Decorators are named after the word "decorate", implying that they add a new layer of functionality to an existing function. Think of a decorator as a layer of frosting on a cake – it doesn't change the cake itself, but it adds a new flavor and texture.
+
+Python decorators are a fundamental concept in functional programming and are widely used in the Python community.
 
 ### Key Concepts
-* **Compilation**: The process of converting C code into machine code that can be executed directly by the computer.
-* **Memory Management**: The process of managing the memory used by a C program, including allocating and deallocating memory for variables and data structures.
-* **Pointers**: Variables that store memory addresses, allowing C programs to manipulate and access data at specific locations in memory.
-* **Structures**: Data types that allow multiple variables to be stored in a single unit, making it easier to organize and manipulate complex data.
+
+- **Function wrapper**: a function that takes another function as an argument and returns a new function that "wraps" the original function.
+- **Decorator syntax**: `@decorator_name(func_name)` or `def decorator_name(func_name): ...`
+- **Decorator arguments**: a list of arguments passed to the decorator, which can be accessed using the `*args` and `**kwargs` syntax.
+- **Decorator return value**: the value returned by the decorator, which is used to modify the behavior of the original function.
 
 ### Example
-```c
-#include <stdio.h>
 
-int main() {
-    int x = 5;
-    printf("%d", x); // prints 5
-    return 0;
-}
+```python
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
 ```
-This C program simply declares an integer variable `x` with the value 5, and then prints its value to the console using the `printf` function.
+
+The output will be:
+```
+Something is happening before the function is called.
+Hello!
+Something is happening after the function is called.
+```
 
 ## Practice Exercise
-- **Task**: Write a simple C program that declares a variable, assigns it a value, and then prints its value to the console using `printf`.
+- **Task**: write a decorator that logs the execution time of a function.
 - **Expected input**: None
-- **Expected output**: The output of the program (e.g. "5")
-- **Hint 1**: Make sure to include the necessary header file (`<stdio.h>`) and use the correct syntax for declaring and printing variables.
-- **Hint 2**: Pay attention to the data types and the correct usage of `printf` to get the desired output.
+- **Expected output**: a Python function that can be used as a decorator.
+- **Hint 1**: use the `time` module to measure execution time.
+- **Hint 2**: use the `functools.wraps` decorator to preserve the original function's metadata.
 
 ## Common Mistakes
-* **Not including the necessary header file**: Omitting `<stdio.h>` will cause the compiler to error out.
-* **Incorrect data types**: Using the wrong data type (e.g. `char` instead of `int`) will result in incorrect output or errors.
-* **Missing `return 0`**: Forgetting to include `return 0` at the end of the `main` function will prevent the program from compiling successfully.
+* Using `@decorator_name` with a function name instead of a decorator function.
+* Forgetting to use `functools.wraps` to preserve the original function's metadata.
+* Not handling exceptions properly in the decorator.
+
+## Review Comments
+- **Missing information**: The study guide could benefit from a clear explanation of how decorators are used with classes and object-oriented programming.
+- **Unclear parts**: The explanation of the decorator return value is not clear.
+- **Suggestions**:
+  - Improve the explanation of the decorator return value to explain how it is used to modify the behavior of the original function.
+  - Add more details about how to handle exceptions in the decorator.
+  - Clarify the difference between `*args` and `**kwargs` in the context of decorator arguments.
+- **Recommendation**: Needs revision
+
+## Final Summary
+Students should remember that decorators are a powerful tool for modifying function behavior without changing source code, and that they can be used to add features such as logging, authentication, and caching to existing functions. They should also understand how to use decorators with classes and object-oriented programming, and how to handle exceptions and access decorator arguments.

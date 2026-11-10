@@ -17,6 +17,8 @@ Answer ONLY in Markdown, with exactly these two sections, in this order:
 - **Unclear parts**: what is ambiguous or unclear (or "None").
 - **Suggestions**: 2 or 3 short, actionable improvements.
 - **Recommendation**: "Approved" or "Needs revision", with one sentence why.
+- Each suggestion must name a specific part of the guide.
+- If you list missing information, recommend "Needs revision".
 
 ## Final Summary
 Two or three sentences: what the student must remember about the topic.

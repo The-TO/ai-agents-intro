@@ -1,13 +1,10 @@
 """Shared code for every agent: build the model and run an agent."""
-import os
-
-from dotenv import load_dotenv
 from google.adk.models.lite_llm import LiteLlm
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
-load_dotenv()  # reads .env and fills os.environ
+from config import get_model_name
 
 APP_NAME = "study_guide_generator"
 USER_ID = "student"
@@ -15,7 +12,7 @@ USER_ID = "student"
 
 def get_model():
     """Build the LiteLLM connector from the MODEL_NAME variable."""
-    return LiteLlm(model=os.getenv("MODEL_NAME"))
+    return LiteLlm(model=get_model_name())
 
 
 async def run_agent(agent, prompt):
@@ -41,4 +38,7 @@ async def run_agent(agent, prompt):
         if event.is_final_response() and event.content:
             parts = event.content.parts or []
             final_text = "".join(part.text or "" for part in parts)
+
+    if not final_text.strip():
+        raise RuntimeError(f"{agent.name} returned an empty answer.")
     return final_text.strip()
