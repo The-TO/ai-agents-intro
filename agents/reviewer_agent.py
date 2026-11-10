@@ -27,7 +27,7 @@ Two or three sentences: what the student must remember about the topic.
 def create_reviewer_agent():
     """Creer le reviewer agent."""
     return Agent(
-        name="explainer_agent",                                           # identifiant, sans espace
+        name="reviewer_agent",                                           # identifiant, sans espace
         model=get_model(),                                                # le modèle via LiteLLM
         description="Reviews a draft study guide and gives feedback.",    # à quoi il sert (1 phrase)
         instruction=REVIEWER_INSTRUCTION,                                 # LE comportement

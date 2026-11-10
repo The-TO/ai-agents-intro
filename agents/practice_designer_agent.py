@@ -22,21 +22,22 @@ Answer ONLY in Markdown, with exactly these two sections, in this order:
 A bullet list of 3 mistakes beginners often make with this topic.
 """
 
+
 def create_practice_designer_agent():
-    """Creer l'agent qui va te monter des execice de travail"""
+    """Create the Practice Designer Agent."""
     return Agent(
-        name="practice_designer_agent",                                     # identifiant, sans espace
-        model=get_model(),                                                  # le modèle via LiteLLM
-        description="Designs a short practice exercise for a topic.",       # à quoi il sert (1 phrase)
-        instruction=PRACTICE_INSTRUCTION,                                   # LE comportement
+        name="practice_designer_agent",
+        model=get_model(),
+        description="Designs a short practice exercise for a topic.",
+        instruction=PRACTICE_INSTRUCTION,
     )
 
 
 async def run_practice_designer_agent(topic, explanation):
-    """Run the Explainer Agent on a topic and return its Markdown."""
+    """Run the Practice Designer Agent with the topic and the explanation."""
     agent = create_practice_designer_agent()
     prompt = (
-        f"topic: {topic}\n\n"
-        f"Explanation written by the explainer agent;\n{explanation}"
+        f"Topic: {topic}\n\n"
+        f"Explanation written by the explainer agent:\n{explanation}"
     )
     return await run_agent(agent, prompt)
