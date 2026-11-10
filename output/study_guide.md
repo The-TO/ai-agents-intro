@@ -1,57 +1,38 @@
-# Topic: Python decorators
+# Topic: C langage
 
 ### Simple Explanation
-Python decorators are a powerful tool in Python programming that allows you to modify or extend the behavior of a function without permanently changing it. In essence, a decorator is a small function that takes another function as an argument and returns a new function that "wraps" the original function. This allows you to add new functionality to an existing function without altering its source code.
+C is a programming language that was created in the 1970s by Dennis Ritchie. It is often used for building operating systems, games, and other high-performance applications. C is known for its speed, efficiency, and flexibility, making it a popular choice for many types of programming projects.
 
-Decorators are often used for tasks such as logging, authentication, or caching, but they can be used for any kind of function modification. They are a key feature of the Python programming language and are widely used in many areas of software development.
+C is a low-level language, meaning it allows direct access to computer hardware. This gives it the ability to be very fast and efficient, but it also means that it requires more manual memory management than higher-level languages like Java or Python.
 
-In the context of Python, decorators are implemented using the `@` symbol, which is used to indicate that a function is a decorator. For example, `@my_decorator` is equivalent to `my_function = my_decorator(my_function)`.
+One of the key features of C is its portability, meaning that programs written in C can be compiled and run on many different types of computers with minimal modification.
 
 ### Key Concepts
-- **Decorator**: A small function that takes another function as an argument and returns a new function that wraps the original function.
-- **Wrapper function**: A new function that is created by a decorator and returns the result of the original function.
-- **Function wrapping**: The process of adding new functionality to an existing function without permanently changing its source code.
+* **Compilation**: The process of converting C code into machine code that can be executed directly by the computer.
+* **Memory Management**: The process of managing the memory used by a C program, including allocating and deallocating memory for variables and data structures.
+* **Pointers**: Variables that store memory addresses, allowing C programs to manipulate and access data at specific locations in memory.
+* **Structures**: Data types that allow multiple variables to be stored in a single unit, making it easier to organize and manipulate complex data.
 
 ### Example
-```python
-def my_decorator(func):
-    def wrapper():
-        print("Something is happening before the function is called.")
-        func()
-        print("Something is happening after the function is called.")
-    return wrapper
+```c
+#include <stdio.h>
 
-@my_decorator
-def say_hello():
-    print("Hello!")
-
-say_hello()
+int main() {
+    int x = 5;
+    printf("%d", x); // prints 5
+    return 0;
+}
 ```
-This code defines a decorator `my_decorator` that takes a function `func` as an argument and returns a new function `wrapper`. The `wrapper` function calls the original `func` and adds some additional behavior before and after the call. The `@my_decorator` syntax is used to apply the decorator to the `say_hello` function, effectively creating a new function `wrapper` that wraps the original `say_hello` function.
+This C program simply declares an integer variable `x` with the value 5, and then prints its value to the console using the `printf` function.
 
 ## Practice Exercise
-- **Task**: Implement a simple decorator that prints a message before and after the execution of a function.
+- **Task**: Write a simple C program that declares a variable, assigns it a value, and then prints its value to the console using `printf`.
 - **Expected input**: None
-- **Expected output**: The output of the decorated function.
-- **Hint 1**: Use the `@` symbol to apply the decorator to a function.
-- **Hint 2**: Use the `print` function to add the desired behavior.
-
-```python
-def my_decorator(func):
-    def wrapper():
-        print("Something is happening before the function is called.")
-        func()
-        print("Something is happening after the function is called.")
-    return wrapper
-
-@my_decorator
-def say_hello():
-    print("Hello!")
-
-say_hello()
-```
+- **Expected output**: The output of the program (e.g. "5")
+- **Hint 1**: Make sure to include the necessary header file (`<stdio.h>`) and use the correct syntax for declaring and printing variables.
+- **Hint 2**: Pay attention to the data types and the correct usage of `printf` to get the desired output.
 
 ## Common Mistakes
-* **Overcomplicating the decorator**: Avoid using the decorator for tasks that can be achieved with a simple function call or a loop.
-* **Forgetting to return the original function**: Ensure that the decorator returns the original function to maintain the correct function signature.
-* **Not handling potential errors**: Add error handling code to your decorator to ensure it can handle any exceptions that might occur during function execution.
+* **Not including the necessary header file**: Omitting `<stdio.h>` will cause the compiler to error out.
+* **Incorrect data types**: Using the wrong data type (e.g. `char` instead of `int`) will result in incorrect output or errors.
+* **Missing `return 0`**: Forgetting to include `return 0` at the end of the `main` function will prevent the program from compiling successfully.
