@@ -22,8 +22,7 @@ def main():
         topic = " ".join(sys.argv[1:])
     else:
         topic = input("Enter a programming topic: ")
-    explanation = asyncio.run(run_explainer_agent(topic))
-    markdown = f"# Topic {topic}\n\n{explanation}\n"
+    markdown = asyncio.run(generate(topic))
 
     result = validate_required_sections(markdown)
     if result["valid"]:
