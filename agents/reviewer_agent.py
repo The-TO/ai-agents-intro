@@ -3,6 +3,13 @@ from google.adk.agents import Agent
 
 from agents.agent_runner import get_model, run_agent
 
+# Le Reviewer fait du contrôle qualité : il COMMENTE le brouillon,
+# il ne le réécrit pas ("Do NOT rewrite the guide").
+# L'exemple utile / inutile ("The example does not show the function
+# call" vs "Improve the explanation") montre au modèle le niveau de
+# précision attendu : les modèles imitent bien les exemples.
+# Il écrit aussi "## Final Summary", car c'est le seul agent qui a lu
+# toute la fiche.
 REVIEWER_INSTRUCTION = """You are a reviewer agent.
 You receive the draft of a study guide written by other agents.
 Review it for clarity, completeness and usefulness for a beginner.
@@ -27,13 +34,19 @@ Two or three sentences: what the student must remember about the topic.
 def create_reviewer_agent():
     """Creer le reviewer agent."""
     return Agent(
-        name="reviewer_agent",                                           # identifiant, sans espace
-        model=get_model(),                                                # le modèle via LiteLLM
-        description="Reviews a draft study guide and gives feedback.",    # à quoi il sert (1 phrase)
-        instruction=REVIEWER_INSTRUCTION,                                 # LE comportement
+        # Identifiant de l'agent, sans espace.
+        name="explainer_agent",
+        # Le même modèle que les autres agents.
+        model=get_model(),
+        # À quoi sert l'agent, en une phrase.
+        description="Reviews a draft study guide and gives feedback.",
+        # Son comportement : l'instruction définie plus haut.
+        instruction=REVIEWER_INSTRUCTION,
     )
 
 
+# Le Reviewer reçoit UN seul paramètre : le brouillon complet
+# (titre + explication + exercice), qui contient déjà le sujet.
 async def run_reviewer_agent(draft):
     """Run the Reviewer Agent on a draft and return its comments."""
     agent = create_reviewer_agent()
